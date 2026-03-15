@@ -1,3 +1,5 @@
+.idea/
+
 HELP.md
 target/
 .mvn/wrapper/maven-wrapper.jar
@@ -35,8 +37,8 @@ build/
 
 .env
 
-.pem
-.pub
+*.pem
+*.pub
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
