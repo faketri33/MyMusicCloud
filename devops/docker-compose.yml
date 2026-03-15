@@ -1,0 +1,6 @@
+networks:
+  app-tier:
+    driver: bridge
+
+volumes:
+  postgres:
