@@ -12,16 +12,14 @@ import java.util.UUID;
 public class JpaUserRepositoryImpl implements UserRepository {
 
     private final UserEntityRepository userRepository;
-    private final UserMapper mapper;
 
-    public JpaUserRepositoryImpl(UserEntityRepository userRepository, UserMapper mapper) {
+    public JpaUserRepositoryImpl(UserEntityRepository userRepository) {
         this.userRepository = userRepository;
-        this.mapper = mapper;
     }
 
     @Override
     public Optional<UserDomain> loadUserByUsername(String username) {
-        return userRepository.findByUsername(username).map(mapper::toDomain);
+        return userRepository.findByUsername(username).map(UserMapper::toDomain);
     }
 
     @Override
@@ -31,13 +29,13 @@ public class JpaUserRepositoryImpl implements UserRepository {
 
     @Override
     public Optional<UserDomain> get(UUID id) {
-        return userRepository.findById(id).map(mapper::toDomain);
+        return userRepository.findById(id).map(UserMapper::toDomain);
     }
 
     @Override
     public UserDomain save(UserDomain user) {
-        var ue = mapper.toEntity(user);
+        var ue = UserMapper.toEntity(user);
         ue = userRepository.save(ue);
-        return mapper.toDomain(ue);
+        return UserMapper.toDomain(ue);
     }
 }

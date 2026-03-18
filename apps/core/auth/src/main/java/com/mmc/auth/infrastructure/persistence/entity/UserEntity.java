@@ -36,11 +36,14 @@ public class UserEntity{
     private Instant createAt;
     private Instant updateAt;
 
-    public UserEntity(UUID id, String username, String password, Boolean isActive) {
+    public UserEntity(UUID id, String username, String password, Set<ERoles> roles, Boolean isActive, Instant createAt, Instant updateAt) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.roles = roles;
         this.isActive = isActive;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
     }
 
     public UserEntity() {}

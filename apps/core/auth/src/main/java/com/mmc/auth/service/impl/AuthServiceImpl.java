@@ -55,13 +55,13 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public JwtState register(AuthRequestDto ard) {
 
-        if (userRepository.usernameAlreadyExist(ard.login()))
+        if (Boolean.TRUE.equals(userRepository.usernameAlreadyExist(ard.login())))
             throw new UsernameAlreadyExists("This username already used, please choose another one");
 
         UserDomain userDomain = new UserDomain();
 
         userDomain.activate();
-        userDomain.setUsername(userDomain.getUsername());
+        userDomain.setUsername(ard.login());
         userDomain.setPassword(passwordEncoder.encode(ard.password()));
 
         userDomain.addRole(ERoles.DEFAULT);
