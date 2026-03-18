@@ -3,6 +3,7 @@ package com.mmc.auth.config;
 import java.util.List;
 
 import com.mmc.auth.infrastructure.security.CustomUserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,10 +23,13 @@ import org.springframework.web.cors.CorsConfiguration;
 @EnableWebSecurity
 public class WebSecurityConfiguration {
 
+    private final List<String> allowedOrigins;
+
     private final CustomUserDetailsServiceImpl userDetailsService;
     public final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    public WebSecurityConfiguration(CustomUserDetailsServiceImpl userDetailsService, JwtAuthenticationFilter jwtAuthenticationFilter) {
+    public WebSecurityConfiguration(@Value("${cors.allowedOrigins}") List<String> allowedOrigins, CustomUserDetailsServiceImpl userDetailsService, JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.allowedOrigins = allowedOrigins;
         this.userDetailsService = userDetailsService;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
@@ -68,16 +72,13 @@ public class WebSecurityConfiguration {
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration config
-    ) throws Exception {
+    ) {
         return config.getAuthenticationManager();
     }
 
-
     public CorsConfiguration corsConfiguration() {
         var corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOriginPatterns(List.of(
-                "http://localhost:8000"
-        ));
+        corsConfiguration.setAllowedOriginPatterns(allowedOrigins);
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         corsConfiguration.setAllowedHeaders(List.of("*"));
         corsConfiguration.setAllowCredentials(true);
