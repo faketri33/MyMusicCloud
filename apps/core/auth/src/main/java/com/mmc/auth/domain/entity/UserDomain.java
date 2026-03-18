@@ -37,6 +37,7 @@ public class UserDomain {
         return id;
     }
 
+
     public String getUsername() {
         return username;
     }

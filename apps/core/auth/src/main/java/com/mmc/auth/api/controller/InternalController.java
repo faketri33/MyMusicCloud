@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/internal")
+@RequestMapping("api/v1/internal")
 public class InternalController {
 
     private final AuthService authService;
