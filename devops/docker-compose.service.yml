@@ -1,0 +1,53 @@
+services:
+
+  gateway:
+    container_name: gateway
+    build:
+      context: .
+      dockerfile: ../apps/core/gateway
+    env_file:
+      -
+    ports:
+      - "8000:8000"
+    networks:
+      - app-tier
+
+  auth:
+    container_name: auth
+    build:
+      context: .
+      dockerfile: ../apps/core/auth
+    env_file:
+      -
+    networks:
+      - app-tier
+
+  eureka:
+    container_name: eureka
+    build:
+      context: .
+      dockerfile: ../apps/core/eureka
+    env_file:
+      -
+    networks:
+      - app-tier
+
+  metadata:
+    container_name: metadata
+    build:
+      context: .
+      dockerfile: ../apps/core/metadata
+    env_file:
+      -
+    networks:
+      - app-tier
+
+  streaming:
+    container_name: streaming
+    build:
+      context: .
+      dockerfile: ../apps/core/streaming
+    env_file:
+      -
+    networks:
+      - app-tier

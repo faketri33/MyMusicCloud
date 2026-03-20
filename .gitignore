@@ -40,6 +40,8 @@ build/
 *.pem
 *.pub
 
+V20260318222401__create_service_profile.sql
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

@@ -1,6 +1,8 @@
+name: mp3-cloud-player
+
 networks:
   app-tier:
     driver: bridge
 
 volumes:
-  postgres:
+  postgres-data:

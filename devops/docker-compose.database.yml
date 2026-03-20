@@ -4,10 +4,9 @@ services:
     environment:
       POSTGRES_USER: ${AUTH_DATABASE_USER}
       POSTGRES_PASSWORD: ${AUTH_DATABASE_PASSWORD}
-      GDATA: /data/postgres
     ports:
       - "5432:5432"
     volumes:
-      - postgres
+      - postgres-data:/var/lib/postgresql/data
     networks:
       - app-tier
