@@ -2,6 +2,7 @@ package com.mmc.auth.config;
 
 import java.util.List;
 
+import com.mmc.auth.infrastructure.persistence.entity.ERoles;
 import com.mmc.auth.infrastructure.security.CustomUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -46,7 +47,7 @@ public class WebSecurityConfiguration {
                 .authorizeHttpRequests(requests ->
                         requests
                                 .requestMatchers("/api/v1/auth/login", "/api/v1/auth/register").permitAll()
-                                .requestMatchers("/internal/**").hasRole("SERVICE")
+                                .requestMatchers("/api/v1/internal/**").hasRole(ERoles.SERVICE.name())
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: eureka
+  main:
+    banner-mode: off
+  output:
+    ansi:
+      enable: ALWAYS
+
+server:
+  port: 8761
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    server:
+      wait-time-in-ms-when-sync-empty: 0
+      enable-self-preservation: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
+  instance:
+    hostname: eureka-server

@@ -136,8 +136,6 @@ public class JwtServiceImpl implements JwtService {
      *
      * @param userPrincipal information about users who have account in service. (Default spring secure)
      * @param type        access || refresh
-     *
-     *
      */
     private JWTClaimsSet generateClaims(CustomUserPrincipal userPrincipal, long ttlMs, JwtType type) {
 
